@@ -1,0 +1,75 @@
+spring:
+    application:
+      name: gateway
+    datasource:
+        url: jdbc:mysql://localhost:3306/cbi_db?useSSL=false
+        username: root
+        password: can123
+        initialization-mode: never
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+              dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    security:
+      oauth2:
+        client:
+          registration:
+            google:
+              clientId: 721894367325-rkocrd7412et5tsgsrgm5rbpc0543s69.apps.googleusercontent.com
+              clientSecret: U_i-DsYyO6cy6lxPwwYJVdm9
+              redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - email
+                - profile
+            facebook:
+              clientId: clientId
+              clientSecret: clientSecret
+              redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - email
+                - public_profile
+            github:
+              clientId: b7b1dd966d7ce4813df2
+              clientSecret: 865b45900197c3ebc7c1249ae3782f06b67742ca
+              redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - user:email
+                - read:user
+          provider:
+            facebook:
+              authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+              tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+              userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMsec: 864000000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  service-url:
+    defaultZone: http://localhost:8080/eureka
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+
+zuul:
+  prefix: /api
+  routes:
+    middleware:
+      path: /cart/**
+      url: http://localhost:8081/
