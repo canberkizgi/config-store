@@ -7,7 +7,7 @@ spring:
         url: jdbc:mysql://localhost:3306/cbi_db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password: can123
-        initialization-mode: always
+        initialization-mode: never
     jpa:
         show-sql: true
         hibernate:
