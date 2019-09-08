@@ -4,7 +4,7 @@ spring:
     application:
       name: gateway
     datasource:
-        url: jdbc:mysql://localhost:3306/cbi_db?useSSL=false
+        url: jdbc:mysql://localhost:3306/cbi_db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password: can123
         initialization-mode: never
