@@ -1,0 +1,27 @@
+server:
+  port: 6000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/vunon?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: can123321
+    initialization-mode: always #never
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update #create
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+cbi:
+  app:
+    jwtSecret: cbi-Secret!Key*
+    jwtExpirationMs: 86400000
